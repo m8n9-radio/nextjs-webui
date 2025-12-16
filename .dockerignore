@@ -1,3 +1,8 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
 # Dependencies
 node_modules
 npm-debug.log*
@@ -16,11 +21,6 @@ build
 # Testing
 coverage
 .nyc_output
-
-# Git
-.git
-.gitignore
-.gitattributes
 
 # GitHub
 .github
