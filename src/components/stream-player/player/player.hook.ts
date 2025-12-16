@@ -6,7 +6,7 @@ import IcecastMetadataPlayer, {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PLAYER_DEFAULTS, PLAYER_MESSAGES } from "@/constants/player.constants";
 
-const STREAM_URL = `${process.env.NEXT_PUBLIC_ICECAST_HOST ?? ""}${process.env.NEXT_PUBLIC_ICECAST_MOUNT ?? ""}`;
+const STREAM_URL = process.env.NEXT_PUBLIC_STREAM_DNS;
 
 export const usePlayerHook = () => {
   const playerRef = useRef<IcecastMetadataPlayer | null>(null);
@@ -35,6 +35,7 @@ export const usePlayerHook = () => {
 
     const handleMetadata = (metadata: IcyMetadata) => {
       if (isMountedRef.current) {
+        console.log(metadata);
         setIcyMetadata(metadata);
         setIsLoading(false);
         setError(null);
