@@ -1,13 +1,14 @@
 import "server-only";
 
 import type { FC } from "react";
+import { cache } from "react";
 import { PlayerWrapper } from "@/components/player/PlayerWrapper";
 import type { IRadio } from "@/types/radio.types";
 
-export async function fetchRadioInfo(): Promise<IRadio> {
+export const fetchRadioInfo = cache(async (): Promise<IRadio> => {
   const response = await fetch(`${process.env.APP_BACKEND_HOST}/radio/info`, {
     cache: "force-cache",
-    next: { revalidate: 1000, tags: ["/radio/info"] },
+    next: { tags: ["/radio/info"] },
   });
 
   if (!response.ok) {
@@ -15,7 +16,7 @@ export async function fetchRadioInfo(): Promise<IRadio> {
   }
 
   return await response.json();
-}
+});
 
 export const DynamicRadioInfo: FC = async () => {
   const radioInfo = await fetchRadioInfo();

@@ -1,15 +1,15 @@
 "use client";
 
 import type { FC } from "react";
-import { StreamTitile } from "@/components/player/StreamTitle";
-import { StreamUrl } from "@/components/player/StreamUrl";
-import type { IRadio } from "@/types/radio.types";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Button } from "@heroui/button";
+import type { IRadio } from "@/types/radio.types";
+import { StreamTitile } from "@/components/player/stream/StreamTitle";
+import { StreamUrl } from "@/components/player/stream/StreamUrl";
 import { usePlayerHook } from "@/hooks/PlayerHook";
 import { PlayIcon, PauseIcon } from "@/icons/player.icon";
 import { Reaction } from "@/components/player/reaction/Reaction";
-import { Listener } from "@/components/player/Listener";
+import { Listen } from "@/components/player/Listen";
 
 interface Props {
   radioInfo: Readonly<IRadio>;
@@ -33,7 +33,7 @@ export const Player: FC<Readonly<Props>> = ({ radioInfo }) => {
         />
       </CardHeader>
       <CardBody className="relative w-full h-80">
-        <Listener
+        <Listen
           current={radioInfo.listener.current}
           peak={radioInfo.listener.peak}
         />

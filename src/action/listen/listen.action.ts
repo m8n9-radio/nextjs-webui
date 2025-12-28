@@ -1,11 +1,26 @@
 "use server";
 
-import type { IListener } from "@/types/radio.types";
+import type { IListen } from "@/types/radio.types";
 
-export async function likeAction(): Promise<IListener> {
-  console.log(`Listen action called`);
+export async function listenAction(): Promise<IListen> {
+  try {
+    const response = await fetch(
+      `${process.env.APP_BACKEND_HOST}/radio/listen`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-cache",
+      },
+    );
 
-  // TODO: Implement backend API call
+    if (!response.ok) {
+      return { current: -1, peak: -1 };
+    }
 
-  return { peak: 2, current: 1 };
+    return await response.json();
+  } catch {
+    return { current: 0, peak: -1 };
+  }
 }

@@ -12,15 +12,15 @@ import {
 } from "@heroui/table";
 import { User } from "@heroui/user";
 import type { IStatistic } from "@/types/statistic.types";
-import { useStatisticHook } from "@/hooks/StatisticHook";
+import { useStatisticsHook } from "@/hooks/StatisticsHook";
 import { getIconComponent } from "@/icons/statistic.icon";
 
 interface Props {
   statistics: Readonly<IStatistic[]>;
 }
 
-export const Statistics: FC<Readonly<Props>> = ({ statistics: stat }) => {
-  const { statistics } = useStatisticHook(stat);
+export const Statistics: FC<Readonly<Props>> = ({ statistics: initialData }) => {
+  const statistics = useStatisticsHook(initialData);
 
   return (
     <Tabs
